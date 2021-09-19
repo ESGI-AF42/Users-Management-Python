@@ -1,5 +1,5 @@
 from corp import Corp
-class Direction():
+class Direction(Corp):
 
     def_init_(self, Age, Phone, Email, Login, Password, Salary):
         self.age = Age
