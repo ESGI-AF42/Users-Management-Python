@@ -1,29 +1,30 @@
-class Membres():
+from corp import Corp
+class Member(Corp):
 
-    def __init__(self, Nom, Prénom, Age, Poste, Numéro, Email, Login, Mot_de_passe):
-        self.nom = Nom
-        self.prenom = Prénom
+    def __init__(self, Name, Firstname, Age, Post, Phone, Email, Login, Password):
+        self.name = Name
+        self.firstname = Firstname
         self.age = Age
-        self.poste = Poste
-        self.numero = Numéro
+        self.post = Post
+        self.phone = Phone
         self.email = Email
         self.login = Login
-        self.mot_de_passe = Mot_De_Passe
+        self.password = Password
 
     def get_entreprise_name(self):
-        return self.nom
+        return self.name
 
-    def get_entreprise_first_name(self):
-        return self.prenom
+    def get_entreprise_firstname(self):
+        return self.firstname
     
     def get_entreprise_age(self):
         return self.age
 
     def get_entreprise_post(self):
-        return self.poste
+        return self.post
 
-    def get_entreprise_number(self):
-        return self.numero
+    def get_entreprise_phone(self):
+        return self.phone
 
     def get_entreprise_email(self):
         return self.email
@@ -32,4 +33,4 @@ class Membres():
         return self.login
 
     def get_entreprise_password(self):
-        return self.mot_de_passe
+        return self.password
