@@ -1,5 +1,5 @@
 from corp import Corp
-class Employee():
+class Employee(Corp):
 
         def __init__(self, Age, Phone, Salary, Fonction):
         self.age = Age
