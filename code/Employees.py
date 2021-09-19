@@ -1,19 +1,20 @@
-class Employés():
+from corp import Corp
+class Employee():
 
-        def __init__(self, Age, Numéro, Salaire, Fonction):
+        def __init__(self, Age, Phone, Salary, Fonction):
         self.age = Age
-        self.numero = Numéro
-        self.salaire = Salaire
+        self.phone = Phone
+        self.salary = Salary
         self.fonction = Fonction
 
-    def get_entreprise_age(self):
+    def get_employee_age(self):
         return self.age
 
-    def get_entreprise_number(self):
-        return self.numero
+    def get_employee_phone(self):
+        return self.phone
     
-    def get_entreprise_salaire(self):
-        return self.salaire
+    def get_employee_salary(self):
+        return self.salary
     
-    def get_entreprise_fonction(self):
+    def get_employee_fonction(self):
         return self.fonction
