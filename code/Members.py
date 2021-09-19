@@ -1,6 +1,6 @@
 class Membres():
 
-    def __init__(self, Nom, Prénom, Age, Poste, Numéro, email, login, mot_de_passe):
+    def __init__(self, Nom, Prénom, Age, Poste, Numéro, Email, Login, Mot_de_passe):
         self.nom = Nom
         self.prenom = Prénom
         self.age = Age
