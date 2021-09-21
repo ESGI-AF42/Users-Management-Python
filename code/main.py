@@ -24,6 +24,7 @@ if file_exists:
         print(newUser.get_member_password())
         stored_psswd = newUser.get_member_password()
         print(Employee.verify_psswd(stored_psswd,"azertyuiop"))
+        #créer un dico de donnée pour sauvegarder l'utilisateur créé 
 
 
 else:
