@@ -1,3 +1,5 @@
+import hashlib, binascii, os
+
 
 class Member():
 
@@ -8,7 +10,10 @@ class Member():
         self.phone = Phone
         self.email = Email
         self.login = Login
-        self.password = hash(Password)
+        key = hashlib.sha256(os.urandom(60)).hexdigest().encode('ascii')
+        psswdHashed = hashlib.pbkdf2_hmac('sha512', Password.encode('utf-8'),key, 100000)
+        psswdHashed = binascii.hexlify(psswdHashed)
+        self.password = (key + psswdHashed).decode('ascii')
         self.corp_id = CorpID
         self.level = ""
 
@@ -39,3 +44,10 @@ class Member():
 
     def set_member_level(self,Level):
         self.level = Level
+
+    def verify_psswd(stored_password, provided_password):
+        key = stored_password[:64]
+        stored_password = stored_password[64:]
+        psswdHashed = hashlib.pbkdf2_hmac('sha512', provided_password.encode('utf-8'), key.encode('ascii'), 100000)
+        psswdHashed = binascii.hexlify(psswdHashed).decode('ascii')
+        return psswdHashed == stored_password
