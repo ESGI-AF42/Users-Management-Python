@@ -1,13 +1,10 @@
 from corp import Corp
-from members import Members
+from member import Member
 
-class Employee(Members):
+class Employee(Member):
 
-    def __init__(self, Age, Phone, Salary, Fonction):
-        self.age = Age
-        self.phone = Phone
-        self.salary = Salary
-        self.fonction = Fonction
+    def __init__(self, Job):
+        self.job = Job
 
 
     def get_employee_age(self):

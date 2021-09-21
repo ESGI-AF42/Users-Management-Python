@@ -1,16 +1,11 @@
 from corp import Corp
-from members import Members
+from member import Member
 
-class Direction(Members):
+class Direction(Member):
 
-    def __init__(self, Age, Phone, Email, Login, Password, Salary):
-        self.age = Age
-        self.phone = Phone
-        self.email = Email
-        self.login = Login
-        self.mpassword = Password
-        self.salary = Salary
-
+    def __init__(self, job):
+        self.age = job
+        
     def get_age(self):
         return self.age
     

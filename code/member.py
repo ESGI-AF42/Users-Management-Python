@@ -1,11 +1,10 @@
 from corp import Corp
 class Member(Corp):
 
-    def __init__(self, Name, Firstname, Age, Post, Phone, Email, Login, Password):
+    def __init__(self, Name, Firstname, Age, Phone, Email, Login, Password):
         self.name = Name
         self.firstname = Firstname
         self.age = Age
-        self.post = Post
         self.phone = Phone
         self.email = Email
         self.login = Login
@@ -20,8 +19,6 @@ class Member(Corp):
     def get_member_age(self):
         return self.age
 
-    def get_member_post(self):
-        return self.post
 
     def get_member_phone(self):
         return self.phone
