@@ -1,9 +1,10 @@
 from corp import Corp
 class Member(Corp):
 
-    def __init__(self, Name, Firstname, Age, Phone, Email, Login, Password):
-        self.name = Name
-        self.firstname = Firstname
+    def __init__(self, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress , UserName, UserFirstname, Age, Phone, Email, Login, Password):
+        Corp.__init__(self, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress)
+        self.name = UserName
+        self.firstname = UserFirstname
         self.age = Age
         self.phone = Phone
         self.email = Email

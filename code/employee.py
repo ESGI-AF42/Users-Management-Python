@@ -1,10 +1,11 @@
-from corp import Corp
 from member import Member
 
 class Employee(Member):
 
-    def __init__(self, Job):
+    def __init__(self, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress , UserName, UserFirstname, Age, Phone, Email, Login, Password,Job):
+        Member.__init__(self, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress , UserName, UserFirstname, Age, Phone, Email, Login, Password)
         self.job = Job
+
 
 
     def get_employee_age(self):

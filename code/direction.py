@@ -1,10 +1,10 @@
-from corp import Corp
 from member import Member
 
 class Direction(Member):
 
-    def __init__(self, job):
-        self.age = job
+    def __init__(self, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress , UserName, UserFirstname, Age, Phone, Email, Login, Password,Job):
+        Member.__init__(self, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress , UserName, UserFirstname, Age, Phone, Email, Login, Password)
+        self.job = Job
         
     def get_age(self):
         return self.age
