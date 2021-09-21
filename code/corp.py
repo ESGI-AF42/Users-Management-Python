@@ -2,12 +2,14 @@
 
 class Corp():
 
-    def __init__(self, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress):
+    def __init__(self, CorpID,CorpName, CorpType, CorpSector, CorpCountry, CorpAddress):
+        self.corp_id = CorpID
         self.corp_name = CorpName
         self.corp_type = CorpType
         self.corp_sector = CorpSector
         self.corp_country = CorpCountry
         self.corp_address = CorpAddress
+
 
 ##getters and setters de l'entreprise inutiles car ils n'y a qu'une seule entreprise dans le projet
     def get_corp_name(self):

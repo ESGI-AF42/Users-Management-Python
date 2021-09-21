@@ -1,5 +1,9 @@
 import os
 import pathlib
+from corp import Corp
+from member import Member
+from employee import Employee
+from director import Director
 
 actual_path= pathlib.Path(__file__ )
 parent_path = actual_path.parent.__str__()
@@ -16,7 +20,9 @@ if file_exists:
         #fonction creation entreprise (et suite qu'il advient)
 
     else:
-        print("which corporation is yours")
+        newCorp = Corp("000","hola","pme","info","france","bât Beta Parc Technopolis, 3 AV du Canada, 91940 les Ulis")
+        newUser = Employee("Fabien","PIRES","20","0672626957","fabien.pires20@gmail.com","fpires","azertyuiop","000","Ingénieur réseau")
+        print(newUser.get_member_level())
 
 else:
     print("No corporation was create before so you should do it first")

@@ -1,15 +1,16 @@
-from corp import Corp
-class Member(Corp):
 
-    def __init__(self, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress , UserName, UserFirstname, Age, Phone, Email, Login, Password):
-        Corp.__init__(self, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress)
+class Member():
+
+    def __init__(self, UserName, UserFirstname, Age, Phone, Email, Login, Password, CorpID):
         self.name = UserName
         self.firstname = UserFirstname
         self.age = Age
         self.phone = Phone
         self.email = Email
         self.login = Login
-        self.password = Password
+        self.password = hash(Password)
+        self.corp_id = CorpID
+        self.level = ""
 
     def get_member_name(self):
         return self.name
@@ -32,3 +33,9 @@ class Member(Corp):
 
     def get_member_password(self):
         return self.password
+
+    def get_member_level(self):
+        return self.level
+
+    def set_member_level(self,Level):
+        self.level = Level
