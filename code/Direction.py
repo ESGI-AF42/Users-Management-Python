@@ -1,7 +1,9 @@
 from corp import Corp
-class Direction(Corp):
+from members import Members
 
-    def_init_(self, Age, Phone, Email, Login, Password, Salary):
+class Direction(Members):
+
+    def __init__(self, Age, Phone, Email, Login, Password, Salary):
         self.age = Age
         self.phone = Phone
         self.email = Email

@@ -1,11 +1,14 @@
 from corp import Corp
-class Employee(Corp):
+from members import Members
 
-        def __init__(self, Age, Phone, Salary, Fonction):
+class Employee(Members):
+
+    def __init__(self, Age, Phone, Salary, Fonction):
         self.age = Age
         self.phone = Phone
         self.salary = Salary
         self.fonction = Fonction
+
 
     def get_employee_age(self):
         return self.age
