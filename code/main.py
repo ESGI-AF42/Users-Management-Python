@@ -1,3 +1,15 @@
+##objectifs, application de création et gestion d'entreprise et d'employés
+#lors de la création dune entreprise un user root est créé avec par mot de passe root 
+#(ce mot de passe devra etre changé)
+#
+#un user fait forcément partie d'une enreprise
+#un user est soit "director" soit "employee"
+#tout user peut modifier ses paramètres sauf son appartenance à une entreprise et son login
+#
+#seul un director peut ajouter un employee ou un autre director
+#seul un director peut supprimer un employee
+#seul un director peut modifier les informations de l'entreprise
+
 import os, hashlib, pathlib, binascii, time, csv
 from corp import Corp
 from user import User
@@ -21,13 +33,15 @@ if file_exists:
         Corp.create_corp(file_path)
 
     else:
-        newCorp = Corp("000","hola","pme","info","france","bât Beta Parc Technopolis, 3 AV du Canada, 91940 les Ulis")
-        newUser = Employee("Fabien","PIRES","20","0672626957","fabien.pires20@gmail.com","fpires","azertyuiop","000","Ingénieur réseau")
+        #demander quelle entreprise est la notre, sinon il faut en créer
+            #si on choisit de créer entreprise alors meme procesus que pour la creation normal
+            #sinon on se connecte avec un user de l'entreprise correspondante
+        newUser = Employee("Fabien","PIRES","20","0672626957","fabien.pires20@gmail.com","fpires","azertyuiop","1","Ingénieur réseau")
         print(newUser.get_user_level())
         print(newUser.get_user_password())
         stored_psswd = newUser.get_user_password()
-        print(Employee.verify_psswd(stored_psswd,"azertyuiop"))
-        #créer un dico de donnée pour sauvegarder l'utilisateur créé 
+        print(User.verify_psswd(stored_psswd,"azertyuiop"))
+        
 
 
 else:
