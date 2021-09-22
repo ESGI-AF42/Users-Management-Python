@@ -1,11 +1,14 @@
-from member import Member
+from user import User
 
-class Director(Member):
+class Director(User):
 
     def __init__(self,UserName, UserFirstname, Age, Phone, Email, Login, Password, CorpID, Job):
-        Member.__init__(self,UserName, UserFirstname, Age, Phone, Email, Login, Password, CorpID)
-        self.set_member_level("director")
+        User.__init__(self,UserName, UserFirstname, Age, Phone, Email, Login, Password, CorpID)
+        self.set_user_level("director")
         self.job = Job
         
     def get_director_job(self):
         return self.job
+
+    def create_root_user(CorpID):
+        firstUser = Director('None', 'None', 'None', 'None', 'None', 'root', 'root', 'None', 'None')
