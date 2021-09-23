@@ -104,6 +104,8 @@ class Corp():
     def connect_to_existing_corp(file_path):
         with open(file_path, 'r') as csvfile:
             filereader = csv.reader(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            dict
             for line in filereader:
-                print(line)
+                for column in line:
+                    
 
