@@ -60,8 +60,6 @@ class Corp():
         CorpSector ="" 
         CorpCountry =""
         CorpAddress =""
-        print("No corporation was create before so you should do it first. Please complete empty fields")
-        time.sleep(1)
         while not CorpID:
             try:
                 CorpID=int(input("Corp ID (must be a number):"))
@@ -102,3 +100,10 @@ class Corp():
             filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             filewriter.writerow([CorpID, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress])
             csvfile.close()
+
+    def connect_to_existing_corp(file_path):
+        with open(file_path, 'r') as csvfile:
+            filereader = csv.reader(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            for line in filereader:
+                print(line)
+

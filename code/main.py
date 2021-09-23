@@ -4,23 +4,23 @@
 #
 #un user fait forcément partie d'une enreprise
 #un user est soit "director" soit "employee"
-#tout user peut modifier ses paramètres sauf son appartenance à une entreprise et son login
+#tout user peut modifier ses paramètres sauf son appartenance à une entreprise et son log3
 #
 #seul un director peut ajouter un employee ou un autre director
 #seul un director peut supprimer un employee
 #seul un director peut modifier les informations de l'entreprise
 
-import os, hashlib, pathlib, binascii, time, csv
+import os, hashlib, pathlib, binascii, time, csv, Team_IT_functions
 from corp import Corp
 from user import User
 from employee import Employee
 from director import Director
 
+
 actual_path= pathlib.Path(__file__ )
 parent_path = actual_path.parent.__str__()
 file_path= parent_path+"\data\corp.csv"
 file_exists = os.path.exists(file_path)
-
 
 
 #beginning of the main
@@ -34,6 +34,7 @@ if file_exists:
 
     else:
         #demander quelle entreprise est la notre, sinon il faut en créer
+        Team_IT_functions.start_connexion_process(file_path)
             #si on choisit de créer entreprise alors meme procesus que pour la creation normal
             #sinon on se connecte avec un user de l'entreprise correspondante
         newUser = Employee("Fabien","PIRES","20","0672626957","fabien.pires20@gmail.com","fpires","azertyuiop","1","Ingénieur réseau")
@@ -45,9 +46,10 @@ if file_exists:
 
 
 else:
+    print("No corporation was create before so you should do it first. Please complete empty fields")
+    time.sleep(1)
     #fonction pour créer le fichier entreprise
     Corp.create_corpCSV(file_path)
-
     #fonction pour créer une entreprise
     Corp.create_corp(file_path)
 
