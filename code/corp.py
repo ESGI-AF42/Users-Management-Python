@@ -119,7 +119,6 @@ class Corp():
         corp_list = []
         with open(file_path, 'r') as csvfile:
             filereader = csv.reader(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            Tab = list(["CorpID","CorpName","CorpType","CorpSector","CorpCountry","CorpAddress"])
             CorpID_cpt = 0
             CorpName_cpt = 0
             CorpType_cpt = 0
@@ -155,12 +154,3 @@ class Corp():
             for corp_obj in corp_list:
                 print (corp_obj.get_corp_id()," : ",corp_obj.get_corp_name())
 #fin load_corp_from_csv()
-
-
-
-                
-
-            
-
-                    
-
