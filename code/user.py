@@ -50,3 +50,10 @@ class User():
         psswdHashed = hashlib.pbkdf2_hmac('sha512', provided_password.encode('utf-8'), key.encode('ascii'), 100000)
         psswdHashed = binascii.hexlify(psswdHashed).decode('ascii')
         return psswdHashed == stored_password
+
+
+#debut connect()
+    def connect(filepath,CorpID):
+        print(filepath)
+        print(CorpID)
+#fin connect()

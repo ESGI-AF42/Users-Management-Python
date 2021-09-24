@@ -18,7 +18,7 @@ def start_connexion_process(file_path):
             Corp.create_corp(file_path)
             check_value=False
         elif number == 2:
-            Corp.connect_to_existing_corp(file_path)
+            Corp.load_corp_from_csv(file_path)
             check_value=False
         else:
             print("Invalid Choise! You should choose 1 or 2.")

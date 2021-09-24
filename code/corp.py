@@ -1,4 +1,5 @@
 ##classe pour contextualisé le projet
+from user import User
 import os, hashlib, pathlib, binascii, time, csv
 
 class Corp():
@@ -13,6 +14,9 @@ class Corp():
 
 
 ##getters and setters de l'entreprise inutiles car ils n'y a qu'une seule entreprise dans le projet
+    def get_corp_id(self):
+        return self.corp_id
+
     def get_corp_name(self):
         return self.corp_name
     
@@ -43,16 +47,19 @@ class Corp():
 
     def set_corp_address(self,CorpAddress):
         self.corp_address = CorpAddress
-
 ##fin des getters and setters
-    
 
+
+#debut create_corpCSV()
     def create_corpCSV(file_path):
         with open(file_path, 'w') as csvfile:
             filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             filewriter.writerow(['CorpID', 'CorpName', 'CorpType', 'CorpSector', 'CorpCountry', 'CorpAddress'])
             csvfile.close()
-  
+#fin create_corpCSV()
+
+
+#debut create_corp()
     def create_corp(file_path):
         CorpID =""
         CorpName =""
@@ -100,12 +107,59 @@ class Corp():
             filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             filewriter.writerow([CorpID, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress])
             csvfile.close()
+        User.connect(file_path,CorpID)
+#fin create_corp()
 
-    def connect_to_existing_corp(file_path):
+
+
+#debut load_corp_from_csv()
+    def load_corp_from_csv(file_path):
+        print("What is your corp : ")
+        corp_list = []
         with open(file_path, 'r') as csvfile:
             filereader = csv.reader(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            dict
+            Tab = list(["CorpID","CorpName","CorpType","CorpSector","CorpCountry","CorpAddress"])
+            CorpID_cpt = 0
+            CorpName_cpt = 0
+            CorpType_cpt = 0
+            CorpSector_cpt = 0
+            CorpCountry_cpt = 0
+            CorpAddress_cpt = 0
+            tmp_cpt = 0
             for line in filereader:
                 for column in line:
+                    if column == "CorpID":
+                        CorpID_cpt = tmp_cpt
+                        tmp_cpt=tmp_cpt+1
+                    elif column == "CorpName":
+                        CorpName_cpt = tmp_cpt
+                        tmp_cpt=tmp_cpt+1
+                    elif column == "CorpType":
+                        CorpType_cpt = tmp_cpt
+                        tmp_cpt=tmp_cpt+1
+                    elif column == "CorpSector":
+                        CorpSector_cpt = tmp_cpt
+                        tmp_cpt=tmp_cpt+1
+                    elif column == "CorpCountry":
+                        CorpCountry_cpt = tmp_cpt
+                        tmp_cpt=tmp_cpt+1
+                    elif column == "CorpAddress":
+                        CorpAddress_cpt = tmp_cpt
+                        tmp_cpt=tmp_cpt+1
+                    else:
+                        break   
+                if line[CorpID_cpt] != "CorpID":
+                    corp_list.append(Corp(line[CorpID_cpt],line[CorpName_cpt],line[CorpType_cpt],line[CorpSector_cpt],line[CorpCountry_cpt],line[CorpAddress_cpt]))
+            
+            for corp_obj in corp_list:
+                print (corp_obj.get_corp_id()," : ",corp_obj.get_corp_name())
+#fin load_corp_from_csv()
+
+
+
+                
+
+            
+
                     
 

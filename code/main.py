@@ -37,11 +37,12 @@ if file_exists:
         Team_IT_functions.start_connexion_process(file_path)
             #si on choisit de créer entreprise alors meme procesus que pour la creation normal
             #sinon on se connecte avec un user de l'entreprise correspondante
-        newUser = Employee("Fabien","PIRES","20","0672626957","fabien.pires20@gmail.com","fpires","azertyuiop","1","Ingénieur réseau")
-        print(newUser.get_user_level())
-        print(newUser.get_user_password())
-        stored_psswd = newUser.get_user_password()
-        print(User.verify_psswd(stored_psswd,"azertyuiop"))
+            
+        #newUser = Employee("Fabien","PIRES","20","0672626957","fabien.pires20@gmail.com","fpires","azertyuiop","1","Ingénieur réseau")
+        #print(newUser.get_user_level())
+        #print(newUser.get_user_password())
+        #stored_psswd = newUser.get_user_password()
+        #print(User.verify_psswd(stored_psswd,"azertyuiop"))
         
 
 
