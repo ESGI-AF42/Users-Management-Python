@@ -1,4 +1,4 @@
-import hashlib, binascii, os
+import os, hashlib, pathlib, binascii, time, csv
 
 
 class User():
@@ -17,6 +17,7 @@ class User():
         self.corp_id = CorpID
         self.level = ""
 
+##début des des getters and setters
     def get_user_name(self):
         return self.name
 
@@ -50,6 +51,18 @@ class User():
         psswdHashed = hashlib.pbkdf2_hmac('sha512', provided_password.encode('utf-8'), key.encode('ascii'), 100000)
         psswdHashed = binascii.hexlify(psswdHashed).decode('ascii')
         return psswdHashed == stored_password
+##fin des getters and setters
+
+
+
+#debut create_corpCSV()
+    def create_userCSV(file_path):
+        with open(file_path, 'w') as csvfile:
+            filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            filewriter.writerow(['UserName', 'UserFirstname', 'Age', 'Phone', 'Email', 'Login', 'Password', 'CorpID'])
+            csvfile.close()
+#fin create_corpCSV()
+
 
 
 #debut connect()

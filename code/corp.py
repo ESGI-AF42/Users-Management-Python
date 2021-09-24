@@ -1,6 +1,8 @@
 ##classe pour contextualisé le projet
-from user import User
 import os, hashlib, pathlib, binascii, time, csv
+from user import User
+from director import Director
+
 
 class Corp():
 
@@ -13,7 +15,7 @@ class Corp():
         self.corp_address = CorpAddress
 
 
-##getters and setters de l'entreprise inutiles car ils n'y a qu'une seule entreprise dans le projet
+##début des des getters and setters
     def get_corp_id(self):
         return self.corp_id
 
@@ -108,6 +110,7 @@ class Corp():
             filewriter.writerow([CorpID, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress])
             csvfile.close()
         user_corp = Corp(CorpID, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress)
+        Director.create_root_user(CorpID)
         User.connect(file_path,user_corp)
 #fin create_corp()
 

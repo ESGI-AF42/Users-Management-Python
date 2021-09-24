@@ -19,22 +19,27 @@ from director import Director
 
 actual_path= pathlib.Path(__file__ )
 parent_path = actual_path.parent.__str__()
-file_path= parent_path+"\data\corp.csv"
-file_exists = os.path.exists(file_path)
+corp_file_path = parent_path+'\data\corp.csv'
+user_file_path = parent_path+'\data\\user.csv'
+corp_file_exist = os.path.exists(corp_file_path)
+user_file_exist = os.path.exists(user_file_path)
 
 
 #beginning of the main
 print ("hello user, and welcome to your best personal assistant, yoru")
 time.sleep(3)
 
-if file_exists:
-    if os.stat(file_path).st_size == 0:
+if not user_file_exist:
+        User.create_userCSV(user_file_path)
+
+if corp_file_exist:
+    if os.stat(corp_file_path).st_size == 0:
         print("there seem to be problems with your created company. You need to create valid one before")
-        Corp.create_corp(file_path)
+        Corp.create_corp(corp_file_path)
 
     else:
         #demander quelle entreprise est la notre, sinon il faut en créer
-        Team_IT_functions.start_connexion_process(file_path)
+        Team_IT_functions.start_connexion_process(corp_file_path)
             #si on choisit de créer entreprise alors meme procesus que pour la creation normal
             #sinon on se connecte avec un user de l'entreprise correspondante
             
@@ -49,9 +54,7 @@ if file_exists:
 else:
     print("No corporation was create before so you should do it first. Please complete empty fields")
     time.sleep(1)
-    #fonction pour créer le fichier entreprise
-    Corp.create_corpCSV(file_path)
-    #fonction pour créer une entreprise
-    Corp.create_corp(file_path)
+    Corp.create_corpCSV(corp_file_path)
+    Corp.create_corp(corp_file_path)
 
     #un utilisateur root sera créé par défaut auquel on demande la modification du mot de passe par defaut

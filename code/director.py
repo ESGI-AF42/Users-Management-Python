@@ -11,4 +11,4 @@ class Director(User):
         return self.job
 
     def create_root_user(CorpID):
-        firstUser = Director('None', 'None', 'None', 'None', 'None', 'root', 'root', 'None', 'None')
+        RoottUser = Director('None', 'None', 'None', 'None', 'None', 'root', 'root', 'None', CorpID)
