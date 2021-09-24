@@ -11,4 +11,7 @@ class Director(User):
         return self.job
 
     def create_root_user(CorpID):
+        print('default root user as been created with:')
+        print('login: root')
+        print('passord: root')
         RoottUser = Director('None', 'None', 'None', 'None', 'None', 'root', 'root', 'None', CorpID)
