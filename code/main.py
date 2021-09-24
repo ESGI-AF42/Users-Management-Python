@@ -55,10 +55,3 @@ else:
     Corp.create_corp(file_path)
 
     #un utilisateur root sera créé par défaut auquel on demande la modification du mot de passe par defaut
-
-
-
-
-
-
-
