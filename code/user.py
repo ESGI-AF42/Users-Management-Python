@@ -53,7 +53,7 @@ class User():
 
 
 #debut connect()
-    def connect(filepath,CorpID):
+    def connect(filepath,Corp):
         print(filepath)
-        print(CorpID)
+        print(Corp)
 #fin connect()

@@ -107,7 +107,8 @@ class Corp():
             filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             filewriter.writerow([CorpID, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress])
             csvfile.close()
-        User.connect(file_path,CorpID)
+        user_corp = Corp(CorpID, CorpName, CorpType, CorpSector, CorpCountry, CorpAddress)
+        User.connect(file_path,user_corp)
 #fin create_corp()
 
 
