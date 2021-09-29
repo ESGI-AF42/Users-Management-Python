@@ -3,15 +3,14 @@ import os, hashlib, pathlib, binascii, time, csv, Team_IT_functions
 
 class User():
 
-    def __init__(self, UserName, UserFirstname, Age, Phone, Email, Password, CompanyID):
+    def __init__(self, UserName, UserFirstname, Age, Phone, Email, Login, Password, CompanyID):
         self.name = UserName
         self.firstname = UserFirstname
         self.age = Age
         self.phone = Phone
         self.email = Email
-        Login = User.create_login(UserName,UserFirstname)
         self.login = Login
-        self.password = User.hash_psswd(Password)
+        self.password = Password
         self.company_id = int(CompanyID)
         self.job = ""
 
@@ -104,26 +103,54 @@ class User():
             csvfile.close()
 #fin create_userCSV()
 
-
+#debut save_user()
     def save_user(self,user_file_path):
-            with open(user_file_path, 'a') as csvfile:
-                filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-                filewriter.writerow([self.get_user_name(), self.get_user_firstname(), self.get_user_age(), self.get_user_phone(), self.get_user_email(), self.get_user_login(), self.get_user_password(), self.get_user_company_id(), self.get_user_job(), self.get_user_level()])
-                csvfile.close()
+        UserName = self.get_user_name(), 
+        UserFirstname = self.get_user_firstname()
+        with open(user_file_path, 'a') as csvfile:
+            filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            filewriter.writerow([UserName, UserFirstname, self.get_user_age(), self.get_user_phone(), self.get_user_email(), User.create_login(UserName,UserFirstname), User.hash_psswd(self.get_user_password()), self.get_user_company_id(), self.get_user_job(), self.get_user_level()])
+            csvfile.close()
+#fin save_user()
 
-
-    #debut connect()
+#debut connect()
     def connect(company_file_path,user_file_path,choosed_company):
         Connected = False
-        while not Connected:
-            user_list = Team_IT_functions.load_user_from_csv(user_file_path)
-            choosed_company_id=choosed_company.get_company_id()
+        user_list = Team_IT_functions.load_user_from_csv(user_file_path)
+        choosed_company_id=choosed_company.get_company_id()
+        user_login_list=[]
+        login=''
+        
 
+        while not Connected:
             for user_obj in user_list:
                 user_company_id = user_obj.get_user_company_id()
                 if user_company_id == choosed_company_id:
-                    print(user_obj.get_user_login())
-            
-    #fin connect()
+                    user_login_list.append(user_obj.get_user_login())
+            while not login in user_login_list:
+                login = input("Login : ")
+                time.sleep(0.1)
+                if login in user_login_list:
+                    WrongPassword = True
+                    while WrongPassword:
+                        password = input("password : ")
+                        time.sleep(0.1)
+                        if User.verify_psswd(user_obj.get_user_password(),password):
+                            WrongPassword=False
+                        else:
+                            print('wrong password')
+                            print('1 : retry')
+                            print('2 : change login')
+                            #mettre la possibilité de changer de login
+                    Connected = True 
+                else:
+                    print('This login doesn\'t exist in this company')
+                    time.sleep(0.5)
+                    print('1 : retry')
+                    print('2 : change company')
+                    #mettre la possibilité de changer de compagnie
+        print('you are now connected')
+
+#fin connect()
 
     

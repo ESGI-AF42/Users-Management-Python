@@ -2,8 +2,8 @@ from user import User
 
 class Employee(User):
 
-    def __init__(self, UserName, UserFirstname, Age, Phone, Email, Password, CompanyID, Job):
-        User.__init__(self, UserName, UserFirstname, Age, Phone, Email, Password, CompanyID)
+    def __init__(self, UserName, UserFirstname, Age, Phone, Email, Login, Password, CompanyID, Job):
+        User.__init__(self, UserName, UserFirstname, Age, Phone, Email, Login, Password, CompanyID)
         self.set_user_level("employee")
         self.job = Job
 

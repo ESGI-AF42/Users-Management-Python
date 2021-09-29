@@ -98,9 +98,9 @@ def load_user_from_csv(user_file_path):
                         break   
                 if line[UserName_cpt] != "UserName":
                     if line[Level_cpt] == "director":
-                        user_list.append(Director(line[UserName_cpt], line[UserFirstname_cpt], line[Age_cpt], line[Phone_cpt], line[Email_cpt],line[Password_cpt], line[CompanyID_cpt], line[Job_cpt]))
+                        user_list.append(Director(line[UserName_cpt], line[UserFirstname_cpt], line[Age_cpt], line[Phone_cpt], line[Email_cpt], line[Login_cpt], line[Password_cpt], line[CompanyID_cpt], line[Job_cpt]))
                     elif line[Level_cpt] == "employee":
-                        user_list.append(Employee(line[UserName_cpt], line[UserFirstname_cpt], line[Age_cpt], line[Phone_cpt], line[Email_cpt],line[Password_cpt], line[CompanyID_cpt], line[Job_cpt]))
+                        user_list.append(Employee(line[UserName_cpt], line[UserFirstname_cpt], line[Age_cpt], line[Phone_cpt], line[Email_cpt], line[Login_cpt], line[Password_cpt], line[CompanyID_cpt], line[Job_cpt]))
             return user_list    
 #fin load_user_from_csv()
     

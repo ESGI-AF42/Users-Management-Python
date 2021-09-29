@@ -3,8 +3,8 @@ from user import User
 
 class Director(User):
 
-    def __init__(self,UserName, UserFirstname, Age, Phone, Email, Password, CompanyID, Job):
-        User.__init__(self,UserName, UserFirstname, Age, Phone, Email, Password, CompanyID)
+    def __init__(self,UserName, UserFirstname, Age, Phone, Email, Login, Password, CompanyID, Job):
+        User.__init__(self,UserName, UserFirstname, Age, Phone, Email, Login, Password, CompanyID)
         self.set_user_level("director")
         self.job = Job
         
@@ -12,7 +12,7 @@ class Director(User):
         return self.job
 
     def create_root_user(CompanyID,user_user_file_path):
-        RoottUser = Director('oot', 'r', 'None', 'None', 'None', 'root', CompanyID, 'admin')
+        RoottUser = Director('oot', 'r', 'None', 'None', 'None', 'None', 'root', CompanyID, 'admin')
         User.save_user(RoottUser,user_user_file_path)
         print ('Your login is root') 
         print ('and your password is root')
