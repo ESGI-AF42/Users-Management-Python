@@ -11,7 +11,7 @@
 #seul un director peut modifier les informations de l'entreprise
 
 import os, hashlib, pathlib, binascii, time, csv, Team_IT_functions
-from corp import Corp
+from company import Company
 from user import User
 from employee import Employee
 from director import Director
@@ -19,9 +19,9 @@ from director import Director
 
 actual_path= pathlib.Path(__file__ )
 parent_path = actual_path.parent.__str__()
-corp_file_path = parent_path+'\data\corp.csv'
+company_file_path = parent_path+'\data\company.csv'
 user_file_path = parent_path+'\data\\user.csv'
-corp_file_exist = os.path.exists(corp_file_path)
+company_file_exist = os.path.exists(company_file_path)
 user_file_exist = os.path.exists(user_file_path)
 
 
@@ -32,29 +32,27 @@ time.sleep(3)
 if not user_file_exist:
         User.create_userCSV(user_file_path)
 
-if corp_file_exist:
-    if os.stat(corp_file_path).st_size == 0:
-        print("there seem to be problems with your created company. You need to create valid one before")
-        Corp.create_corp(corp_file_path)
+if company_file_exist:
 
-    else:
-        #demander quelle entreprise est la notre, sinon il faut en créer
-        Team_IT_functions.start_connexion_process(corp_file_path)
-            #si on choisit de créer entreprise alors meme procesus que pour la creation normal
-            #sinon on se connecte avec un user de l'entreprise correspondante
+    #demander quelle entreprise est la notre, sinon il faut en créer
+    #si on choisit de créer entreprise alors meme procesus que pour la creation normal
+    #sinon on choisit une des entreprises pour se connecter 
+    Team_IT_functions.start_connexion_process(company_file_path,user_file_path)
+        #on se connecte avec un user de l'entreprise correspondante
+        #prochaine fonction: sauvegarder user dans le fichier
             
-        #newUser = Employee("Fabien","PIRES","20","0672626957","fabien.pires20@gmail.com","fpires","azertyuiop","1","Ingénieur réseau")
-        #print(newUser.get_user_level())
-        #print(newUser.get_user_password())
-        #stored_psswd = newUser.get_user_password()
-        #print(User.verify_psswd(stored_psswd,"azertyuiop"))
+    #newUser = Employee("Fabien","PIRES","20","0672626957","fabien.pires20@gmail.com","fpires","azertyuiop","1","Ingénieur réseau")
+    #print(newUser.get_user_level())
+    #print(newUser.get_user_password())
+    #stored_psswd = newUser.get_user_password()
+    #print(User.verify_psswd(stored_psswd,"azertyuiop"))
         
 
 
 else:
-    print("No corporation was create before so you should do it first. Please complete empty fields")
+    print("No Companyoration was create before so you should do it first. Please complete empty fields")
     time.sleep(1)
-    Corp.create_corpCSV(corp_file_path)
-    Corp.create_corp(corp_file_path)
+    Company.create_companyCSV(company_file_path)
+    Company.create_company(company_file_path,user_file_path)
 
     #un utilisateur root sera créé par défaut auquel on demande la modification du mot de passe par defaut
