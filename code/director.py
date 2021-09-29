@@ -1,5 +1,5 @@
 import os, hashlib, pathlib, binascii, time, csv
-from user import User
+from user import User 
 
 class Director(User):
 
@@ -12,9 +12,10 @@ class Director(User):
         return self.job
 
     def create_root_user(CompanyID,user_user_file_path):
-        RoottUser = Director('oot', 'r', 'None', 'None', 'None', 'root', CompanyID, 'None')
+        RoottUser = Director('oot', 'r', 'None', 'None', 'None', 'root', CompanyID, 'admin')
         User.save_user(RoottUser,user_user_file_path)
-        print ('password : root')
+        print ('Your login is root') 
+        print ('and your password is root')
         print ('( please, change your default password )')
 
 

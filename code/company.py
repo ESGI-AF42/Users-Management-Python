@@ -111,10 +111,9 @@ class Company():
             except:
                 print("invalid or empty value, you should choose a string")
         user_company = Company(CompanyID, CompanyName, CompanyType, CompanySector, CompanyCountry, CompanyAddress)
-        print(company_file_path)
         Company.save_company(user_company, company_file_path)
         Director.create_root_user(CompanyID,user_file_path)
-        Team_IT_functions.connect(company_file_path,user_file_path,user_company)
+        User.connect(company_file_path,user_file_path,user_company)
 #fin create_company()
 
 
@@ -144,27 +143,32 @@ class Company():
                     if column == "CompanyID":
                         CompanyID_cpt = tmp_cpt
                         tmp_cpt=tmp_cpt+1
+
                     elif column == "CompanyName":
                         CompanyName_cpt = tmp_cpt
                         tmp_cpt=tmp_cpt+1
+
                     elif column == "CompanyType":
                         CompanyType_cpt = tmp_cpt
                         tmp_cpt=tmp_cpt+1
+
                     elif column == "CompanySector":
                         CompanySector_cpt = tmp_cpt
                         tmp_cpt=tmp_cpt+1
+
                     elif column == "CompanyCountry":
                         CompanyCountry_cpt = tmp_cpt
                         tmp_cpt=tmp_cpt+1
+
                     elif column == "CompanyAddress":
                         CompanyAddress_cpt = tmp_cpt
                         tmp_cpt=tmp_cpt+1
+                        
                     else:
                         break   
                 if line[CompanyID_cpt] != "CompanyID":
                     company_list.append(Company(line[CompanyID_cpt],line[CompanyName_cpt],line[CompanyType_cpt],line[CompanySector_cpt],line[CompanyCountry_cpt],line[CompanyAddress_cpt]))
             return company_list
-            
 #fin load_company_from_csv()
 
 
@@ -172,7 +176,7 @@ class Company():
         print("which company is yours ? ")
         time.sleep(0.1)
         list_company_id = []
-        company_choosed = None
+        choosed_company = None
         
         for company_obj in company_list:
             print (company_obj.get_company_id()," : ",company_obj.get_company_name())
@@ -180,17 +184,17 @@ class Company():
             list_company_id.append(company_id)
             time.sleep(0.1)
 
-        while not company_choosed or not company_choosed in list_company_id :
+        while not choosed_company or not choosed_company in list_company_id :
             try:
-                company_choosed=int(input("Company ID (must be a number):"))
+                choosed_company=int(input("Company ID (must be a number):"))
                 time.sleep(0.1)
             except: 
                 print("invalid or empty value, you should choose an integer")
 
-            if not company_choosed in list_company_id:
+            if not choosed_company in list_company_id:
                 print('This number is not in the list')
         
         for company_obj in company_list:
-            if company_obj.get_company_id() == company_choosed:
+            if company_obj.get_company_id() == choosed_company:
                 return company_obj
 

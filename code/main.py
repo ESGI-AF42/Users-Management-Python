@@ -38,7 +38,7 @@ if company_file_exist:
     #si on choisit de créer entreprise alors meme procesus que pour la creation normal
     #sinon on choisit une des entreprises pour se connecter 
     Team_IT_functions.start_connexion_process(company_file_path,user_file_path)
-        #on se connecte avec un user de l'entreprise correspondante
+        #on se e avec un user de l'entreprise correspondante
         #prochaine fonction: sauvegarder user dans le fichier
             
     #print(newUser.get_user_level())

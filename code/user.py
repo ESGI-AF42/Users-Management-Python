@@ -1,4 +1,5 @@
-import os, hashlib, pathlib, binascii, time, csv
+import os, hashlib, pathlib, binascii, time, csv, Team_IT_functions 
+
 
 class User():
 
@@ -12,8 +13,7 @@ class User():
         self.login = Login
         self.password = User.hash_psswd(Password)
         self.company_id = int(CompanyID)
-        self.level = ""
-        print ('login : ' + Login) 
+        self.job = ""
 
 ##début des des getters and setters
     def get_user_name(self):
@@ -100,7 +100,7 @@ class User():
     def create_userCSV(user_file_path):
         with open(user_file_path, 'w') as csvfile:
             filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            filewriter.writerow(['UserName', 'UserFirstname', 'Age', 'Phone', 'Email', 'Login', 'Password', 'CompanyID'])
+            filewriter.writerow(['UserName', 'UserFirstname', 'Age', 'Phone', 'Email', 'Login', 'Password', 'CompanyID','Job', 'Level'])
             csvfile.close()
 #fin create_userCSV()
 
@@ -108,6 +108,22 @@ class User():
     def save_user(self,user_file_path):
             with open(user_file_path, 'a') as csvfile:
                 filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-                filewriter.writerow([self.get_user_name(), self.get_user_firstname(), self.get_user_age(), self.get_user_phone(), self.get_user_email(), self.get_user_login(), self.get_user_password(), self.get_user_company_id(), self.get_user_job()])
+                filewriter.writerow([self.get_user_name(), self.get_user_firstname(), self.get_user_age(), self.get_user_phone(), self.get_user_email(), self.get_user_login(), self.get_user_password(), self.get_user_company_id(), self.get_user_job(), self.get_user_level()])
                 csvfile.close()
 
+
+    #debut connect()
+    def connect(company_file_path,user_file_path,choosed_company):
+        Connected = False
+        while not Connected:
+            user_list = Team_IT_functions.load_user_from_csv(user_file_path)
+            choosed_company_id=choosed_company.get_company_id()
+
+            for user_obj in user_list:
+                user_company_id = user_obj.get_user_company_id()
+                if user_company_id == choosed_company_id:
+                    print(user_obj.get_user_login())
+            
+    #fin connect()
+
+    
