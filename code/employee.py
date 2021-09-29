@@ -7,6 +7,6 @@ class Employee(User):
         self.set_user_level("employee")
         self.job = Job
 
-    def get_employee_job(self):
+    def get_user_job(self):
         return self.job
 

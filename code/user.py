@@ -11,7 +11,7 @@ class User():
         Login = User.create_login(UserName,UserFirstname)
         self.login = Login
         self.password = User.hash_psswd(Password)
-        self.company_id = CompanyID
+        self.company_id = int(CompanyID)
         self.level = ""
         print ('login : ' + Login) 
 
@@ -104,4 +104,10 @@ class User():
             csvfile.close()
 #fin create_userCSV()
 
+
+    def save_user(self,user_file_path):
+            with open(user_file_path, 'a') as csvfile:
+                filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+                filewriter.writerow([self.get_user_name(), self.get_user_firstname(), self.get_user_age(), self.get_user_phone(), self.get_user_email(), self.get_user_login(), self.get_user_password(), self.get_user_company_id(), self.get_user_job()])
+                csvfile.close()
 

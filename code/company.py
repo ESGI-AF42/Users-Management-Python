@@ -7,7 +7,7 @@ from director import Director
 class Company():
 
     def __init__(self, CompanyID,CompanyName, CompanyType, CompanySector, CompanyCountry, CompanyAddress):
-        self.company_id = CompanyID
+        self.company_id = int(CompanyID)
         self.company_name = CompanyName
         self.company_type = CompanyType
         self.company_sector = CompanySector
@@ -63,7 +63,7 @@ class Company():
 
 #debut create_company()
     def create_company(company_file_path,user_file_path):
-        CompanyID =""
+        CompanyID = None 
         CompanyName =""
         CompanyType =""
         CompanySector ="" 
@@ -72,53 +72,63 @@ class Company():
         while not CompanyID:
             try:
                 CompanyID=int(input("Company ID (must be a number):"))
+                time.sleep(0.1)
             except:
                 print("invalid or empty value, you should choose an integer")
         
         while not CompanyName:
             try:
                 CompanyName=input("Company Name (must be a string):")
+                time.sleep(0.1)
             except:
                 print("invalid or empty value, you should choose a string")
 
         while not CompanyType:
             try:
                 CompanyType=input("Company Type (must be a string):")
+                time.sleep(0.1)
             except:
                 print("invalid or empty value, you should choose a string")
 
         while not CompanySector:
             try:
                 CompanySector=input("Company Sector (must be a string):")
+                time.sleep(0.1)
             except:
                 print("invalid or empty value, you should choose a string")
 
         while not CompanyCountry:
             try:
                 CompanyCountry=input("Company Country (must be a string):")
+                time.sleep(0.1)
             except:
                 print("invalid or empty value, you should choose a string")
 
         while not CompanyAddress:
             try:
                 CompanyAddress=input("Company Address (must be a string):")
+                time.sleep(0.1)
             except:
                 print("invalid or empty value, you should choose a string")
-
-        with open(company_file_path, 'a') as csvfile:
-            filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-            filewriter.writerow([CompanyID, CompanyName, CompanyType, CompanySector, CompanyCountry, CompanyAddress])
-            csvfile.close()
         user_company = Company(CompanyID, CompanyName, CompanyType, CompanySector, CompanyCountry, CompanyAddress)
+        print(company_file_path)
+        Company.save_company(user_company, company_file_path)
         Director.create_root_user(CompanyID,user_file_path)
         Team_IT_functions.connect(company_file_path,user_file_path,user_company)
 #fin create_company()
 
 
+#debut save_company()
+    def save_company(self, company_file_path):
+       with open(company_file_path, 'a') as csvfile:
+            filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+            filewriter.writerow([self.get_company_id(), self.get_company_name(), self.get_company_type(), self.get_company_sector(), self.get_company_country(), self.get_company_address()])
+            csvfile.close()
+#fin save_company()
+
 
 #debut load_company_from_csv()
     def load_company_from_csv(company_file_path):
-        print("What is your Company : ")
         company_list = []
         with open(company_file_path, 'r') as csvfile:
             filereader = csv.reader(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -153,7 +163,34 @@ class Company():
                         break   
                 if line[CompanyID_cpt] != "CompanyID":
                     company_list.append(Company(line[CompanyID_cpt],line[CompanyName_cpt],line[CompanyType_cpt],line[CompanySector_cpt],line[CompanyCountry_cpt],line[CompanyAddress_cpt]))
+            return company_list
             
-            for company_obj in company_list:
-                print (company_obj.get_company_id()," : ",company_obj.get_company_name())
 #fin load_company_from_csv()
+
+
+    def choose_company(company_list):
+        print("which company is yours ? ")
+        time.sleep(0.1)
+        list_company_id = []
+        company_choosed = None
+        
+        for company_obj in company_list:
+            print (company_obj.get_company_id()," : ",company_obj.get_company_name())
+            company_id = company_obj.get_company_id()
+            list_company_id.append(company_id)
+            time.sleep(0.1)
+
+        while not company_choosed or not company_choosed in list_company_id :
+            try:
+                company_choosed=int(input("Company ID (must be a number):"))
+                time.sleep(0.1)
+            except: 
+                print("invalid or empty value, you should choose an integer")
+
+            if not company_choosed in list_company_id:
+                print('This number is not in the list')
+        
+        for company_obj in company_list:
+            if company_obj.get_company_id() == company_choosed:
+                return company_obj
+
