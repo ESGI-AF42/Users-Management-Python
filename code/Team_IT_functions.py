@@ -27,6 +27,7 @@ def start_connexion_process(company_file_path,user_file_path):
 #debut connect()
 def connect(company_file_path,user_file_path,company):
     print(company_file_path)
+    print(user_file_path)
     print(company.get_company_id())
 #fin connect()
     
