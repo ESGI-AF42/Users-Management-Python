@@ -11,29 +11,33 @@ def start_connexion_process(company_file_path,user_file_path):
     time.sleep(0.1)
     print("2: Connect to an existing Company")
     time.sleep(0.1)
-    
+    print("3: Shutdown")
+    time.sleep(0.1)
+
     check_value=True
     while check_value:
         try:
             number=int(input("Make your choice: "))
+            clearConsole()
             time.sleep(0.1)
         except:
-            print("invalid or empty value, you should choose 1 or 2")
+            print("invalid or empty value, you should choose 1, 2 or 3")
 
         if number == 1:
-            time.sleep(0.5)
+            time.sleep(0.1)
             Company.create_company(company_file_path,user_file_path)
-            check_value=False
         elif number == 2:
-            time.sleep(0.5)
+            time.sleep(0.1)
             company_list = Company.load_company_from_csv(company_file_path)
             choosed_company = Company.choose_company(company_list)
+            clearConsole()
             User.connect(company_file_path, user_file_path, choosed_company)
-            check_value=False  
+        elif number == 3:
+            quit()  
         else:
-            time.sleep(0.5)
-            print("Invalid Choise! You should choose 1 or 2.")
-            time.sleep(0.5)
+            time.sleep(0.1)
+            print("Invalid Choise! You should choose 1, 2 or 3.")
+            time.sleep(0.1)
             
 
 #debut load_user_from_csv()
@@ -103,6 +107,13 @@ def load_user_from_csv(user_file_path):
                         user_list.append(Employee(line[UserName_cpt], line[UserFirstname_cpt], line[Age_cpt], line[Phone_cpt], line[Email_cpt], line[Login_cpt], line[Password_cpt], line[CompanyID_cpt], line[Job_cpt]))
             return user_list    
 #fin load_user_from_csv()
+
+
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'):  
+        command = 'cls'
+    os.system(command)
     
         
 

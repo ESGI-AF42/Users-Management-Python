@@ -52,6 +52,18 @@ class Company():
 ##fin des getters and setters
 
 
+#debut get_company_from_id()
+    def get_company_from_id(CompanyID,company_file_path):
+        company_list=Company.load_company_from_csv(company_file_path)
+        for company_obj in company_list:
+            if company_obj.get_company_id() == CompanyID:
+                return company_obj.get_company_name()
+
+
+
+#fin get_company_from_id()
+
+
 #debut create_companyCSV()
     def create_companyCSV(company_file_path):
         with open(company_file_path, 'w') as csvfile:
@@ -63,19 +75,12 @@ class Company():
 
 #debut create_company()
     def create_company(company_file_path,user_file_path):
-        CompanyID = None 
+        CompanyID=Company.next_company_id(company_file_path)
         CompanyName =""
         CompanyType =""
         CompanySector ="" 
         CompanyCountry =""
-        CompanyAddress =""
-        while not CompanyID:
-            try:
-                CompanyID=int(input("Company ID (must be a number):"))
-                time.sleep(0.1)
-            except:
-                print("invalid or empty value, you should choose an integer")
-        
+        CompanyAddress =""          
         while not CompanyName:
             try:
                 CompanyName=input("Company Name (must be a string):")
@@ -186,15 +191,23 @@ class Company():
 
         while not choosed_company or not choosed_company in list_company_id :
             try:
-                choosed_company=int(input("Company ID (must be a number):"))
+                choosed_company=int(input("Make your choice : "))
                 time.sleep(0.1)
             except: 
                 print("invalid or empty value, you should choose an integer")
 
             if not choosed_company in list_company_id:
                 print('This number is not in the list')
-        
         for company_obj in company_list:
             if company_obj.get_company_id() == choosed_company:
                 return company_obj
+
+    def next_company_id(company_file_path):
+        company_id=[]
+        company_list=Company.load_company_from_csv(company_file_path)
+
+        for company_obj in company_list:
+            company_id.append(company_obj.get_company_id())
+        return len(company_id)+1
+
 

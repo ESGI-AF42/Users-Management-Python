@@ -1,9 +1,10 @@
-import os, hashlib, pathlib, binascii, time, csv, Team_IT_functions 
-
+import os, hashlib, pathlib, binascii, time, csv, Team_IT_functions
+import company
+from getpass import getpass
 
 class User():
 
-    def __init__(self, UserName, UserFirstname, Age, Phone, Email, Login, Password, CompanyID):
+    def __init__(self, UserName, UserFirstname, Age, Phone, Email, Login, Password, CompanyID):     
         self.name = UserName
         self.firstname = UserFirstname
         self.age = Age
@@ -12,7 +13,6 @@ class User():
         self.login = Login
         self.password = Password
         self.company_id = int(CompanyID)
-        self.job = ""
 
 ##début des des getters and setters
     def get_user_name(self):
@@ -105,7 +105,7 @@ class User():
 
 #debut save_user()
     def save_user(self,user_file_path):
-        UserName = self.get_user_name(), 
+        UserName = self.get_user_name() 
         UserFirstname = self.get_user_firstname()
         with open(user_file_path, 'a') as csvfile:
             filewriter = csv.writer(csvfile, lineterminator = '\n', delimiter=';', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -120,6 +120,7 @@ class User():
         choosed_company_id=choosed_company.get_company_id()
         user_login_list=[]
         login=''
+        user_connected = None
         
 
         while not Connected:
@@ -133,9 +134,14 @@ class User():
                 if login in user_login_list:
                     WrongPassword = True
                     while WrongPassword:
-                        password = input("password : ")
+                        password = getpass('Password:')
                         time.sleep(0.1)
                         if User.verify_psswd(user_obj.get_user_password(),password):
+                            user_connected = user_obj
+                            Team_IT_functions.clearConsole()
+                            print('you are now connected')
+                            print('')
+                            time.sleep(0.1)
                             WrongPassword=False
                         else:
                             print('wrong password')
@@ -145,12 +151,100 @@ class User():
                     Connected = True 
                 else:
                     print('This login doesn\'t exist in this company')
-                    time.sleep(0.5)
+                    time.sleep(0.1)
                     print('1 : retry')
                     print('2 : change company')
                     #mettre la possibilité de changer de compagnie
-        print('you are now connected')
-
+        User.connected(user_connected, company_file_path, user_file_path)
 #fin connect()
 
-    
+    def connected(user_connected, company_file_path, user_file_path):
+        print('1 : profil')
+        time.sleep(0.1)
+        print('2 : user-list')
+        time.sleep(0.1)
+        print('3 : disconnect')
+        time.sleep(0.1)
+        
+        while True:
+            try:
+                number=int(input("Make your choice: "))
+                Team_IT_functions.clearConsole()
+                time.sleep(0.1)
+            except:
+                print("invalid or empty value, you should choose 1, 2 or 3")
+
+            if number == 1:              
+                User.show_profile(user_connected, company_file_path, user_file_path)
+            elif number == 2:              
+                User.show_user_list(user_file_path,user_connected)
+            elif number == 3:
+                Team_IT_functions.start_connexion_process(company_file_path,user_file_path) 
+            else:
+                time.sleep(0.1)
+                print("Invalid Choise! You should choose 1, 2 or 3.")
+                time.sleep(0.1)
+
+    def show_profile(user_connected, company_file_path, user_file_path):
+        print("")
+        print("PROFILE")
+        print("")
+        print("UserName : ", user_connected.get_user_name())
+        print("UserFirstname : ", user_connected.get_user_firstname())
+        print("Age : ", user_connected.get_user_age())
+        print("Phone : ", user_connected.get_user_phone())
+        print("Email : ", user_connected.get_user_email())
+        print("Company : ", company.Company.get_company_from_id(user_connected.get_user_company_id(), company_file_path))
+        print("Job : ", user_connected.get_user_job())
+        print("Level : ", user_connected.get_user_level())
+        print("")
+        print("")
+        time.sleep(0.1)
+        print('1 : edit')
+        time.sleep(0.1)
+        print('2 : back')
+        
+
+        while True:
+            try:
+                number=int(input("Make your choice: "))
+                Team_IT_functions.clearConsole()
+                time.sleep(0.1)
+            except:
+                print("invalid or empty value, you should choose 1 or 2")
+
+            if number == 1:              
+                User.edit_profile(user_connected)
+            elif number == 2:  
+                User.connected(user_connected, company_file_path, user_file_path)
+            else:
+                time.sleep(0.1)
+                print("Invalid Choise! You should choose 1 or 2")
+                time.sleep(0.1)
+#Todo
+    def edit_profile(user_connected):
+        print("Which information would you change ?")
+        print("")
+        print("1 : UserName")
+        print("2 : UserFirstname")
+        print("3 : Age")
+        print("4 : Phone")
+        print("5 : Email")
+
+
+    def show_user_list(user_file_path, user_connected):
+        user_dic = {}
+        user_list = Team_IT_functions.load_user_from_csv(user_file_path)
+        for user_obj in user_list:
+            if user_connected.get_user_company_id() == user_obj.get_user_company_id():
+                user_name = user_obj.get_user_name()
+                user_firstname = user_obj.get_user_firstname()
+                user_age = user_obj.get_user_age()
+                user_phone = user_obj.get_user_phone()
+                user_email = user_obj.get_user_email()
+                user_level = user_obj.get_user_level()
+                user_dic[user_obj.get_user_login()]=[user_name,user_firstname,user_age,user_phone,user_email,user_level]
+        print ("{:<8} {:<8} {:<15} {:<5} {:<11} {:<20} {:<9}".format('Login','UserName','UserFirstname','Age','Phone','Email','Level'))
+        for key, value in user_dic.items():
+            userName, userFirstname, age, phone, email, level = value
+        print ("{:<8} {:<8} {:<15} {:<5} {:<11} {:<20} {:<9}".format(key, userName, userFirstname, age, phone, email, level))

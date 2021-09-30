@@ -27,7 +27,7 @@ user_file_exist = os.path.exists(user_file_path)
 
 #beginning of the main
 print ("hello user, and welcome to your best personal assistant, yoru")
-time.sleep(2)
+time.sleep(0.1)
 
 if not user_file_exist:
         User.create_userCSV(user_file_path)
