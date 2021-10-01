@@ -117,6 +117,7 @@ class Company():
                 print("invalid or empty value, you should choose a string")
         user_company = Company(CompanyID, CompanyName, CompanyType, CompanySector, CompanyCountry, CompanyAddress)
         Company.save_company(user_company, company_file_path)
+        Team_IT_functions.clearConsole()
         Director.create_root_user(CompanyID,user_file_path)
         User.connect(company_file_path,user_file_path,user_company)
 #fin create_company()
@@ -177,30 +178,37 @@ class Company():
 #fin load_company_from_csv()
 
 
-    def choose_company(company_list):
-        print("which company is yours ? ")
-        time.sleep(0.1)
-        list_company_id = []
-        choosed_company = None
-        
-        for company_obj in company_list:
-            print (company_obj.get_company_id()," : ",company_obj.get_company_name())
-            company_id = company_obj.get_company_id()
-            list_company_id.append(company_id)
+    def choose_company(company_list, company_file_path, user_file_path):
+        if len(company_list)==0:
+            print("No existing company")
             time.sleep(0.1)
-
-        while not choosed_company or not choosed_company in list_company_id :
-            try:
-                choosed_company=int(input("Make your choice : "))
+            print("Please create one")
+            time.sleep(0.1)
+            Company.create_company(company_file_path, user_file_path)
+        else:
+            print("which company is yours ? ")
+            time.sleep(0.1)
+            list_company_id = []
+            choosed_company = None
+            
+            for company_obj in company_list:
+                print (company_obj.get_company_id()," : ",company_obj.get_company_name())
+                company_id = company_obj.get_company_id()
+                list_company_id.append(company_id)
                 time.sleep(0.1)
-            except: 
-                print("invalid or empty value, you should choose an integer")
 
-            if not choosed_company in list_company_id:
-                print('This number is not in the list')
-        for company_obj in company_list:
-            if company_obj.get_company_id() == choosed_company:
-                return company_obj
+            while not choosed_company or not choosed_company in list_company_id :
+                try:
+                    choosed_company=int(input("Make your choice : "))
+                    time.sleep(0.1)
+                except: 
+                    print("invalid or empty value, you should choose an integer")
+
+                if not choosed_company in list_company_id:
+                    print('This number is not in the list')
+            for company_obj in company_list:
+                if company_obj.get_company_id() == choosed_company:
+                    return company_obj
 
     def next_company_id(company_file_path):
         company_id=[]
