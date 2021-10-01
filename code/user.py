@@ -13,7 +13,7 @@ class User():
         self.login = Login
         self.password = Password
         self.company_id = int(CompanyID)
-        self.state = bool(State)
+        self.state = State
 
 ##début des des getters and setters
     def get_user_name(self):
@@ -139,23 +139,29 @@ class User():
                 login = input("Login : ")
                 time.sleep(0.1)
                 if login in user_login_list:
-                    WrongPassword = True
-                    while WrongPassword:
-                        password = getpass('Password:')
-                        time.sleep(0.1)
-                        if User.verify_psswd(user_obj.get_user_password(),password):
-                            user_connected = user_obj
-                            Team_IT_functions.clearConsole()
-                            print('you are now connected')
-                            print('')
+                    if User.check_user_state(login, choosed_company_id ,user_file_path):
+                        WrongPassword = True
+                        while WrongPassword:
+                            password = getpass('Password:')
                             time.sleep(0.1)
-                            WrongPassword=False
-                        else:
-                            print('wrong password')
-                            print('1 : retry')
-                            print('2 : change login')
-                            #mettre la possibilité de changer de login
-                    Connected = True 
+                            if User.verify_psswd(user_obj.get_user_password(),password):
+                                user_connected = user_obj
+                                Team_IT_functions.clearConsole()
+                                print('you are now connected')
+                                print('')
+                                time.sleep(0.1)
+                                WrongPassword=False
+                            else:
+                                print('wrong password')
+                                print('1 : retry')
+                                print('2 : change login')
+                                #mettre la possibilité de changer de login
+                        Connected = True 
+                    else:
+                        print("this login is deactivated in this company, choose an other one or change company")
+                        time.sleep(0.1)
+                        Team_IT_functions.start_connexion_process(company_file_path,user_file_path)
+
                 else:
                     print('This login doesn\'t exist in this company')
                     time.sleep(0.1)
@@ -269,7 +275,7 @@ class User():
             userName, userFirstname, age, phone, email, level = value
         print ("{:<8} {:<8} {:<15} {:<5} {:<11} {:<20} {:<9}".format(key, userName, userFirstname, age, phone, email, level))
 
-    
+#Todo    
     def manage_users():
         print("manage users")
         time.sleep(0.1)
@@ -281,5 +287,18 @@ class User():
         time.sleep(0.1)
 
 
+#Todo
     def manage_company():
         print("manage company")
+
+    def check_user_state(login, companyID,user_file_path):
+        State = False
+        user_list = Team_IT_functions.load_user_from_csv(user_file_path)
+        
+
+        for user_obj in user_list:
+            check = int(user_obj.get_user_state())
+            if login == user_obj.get_user_login() and user_obj.get_user_company_id() == companyID:
+                if check != 0 :
+                    State = True
+        return State
