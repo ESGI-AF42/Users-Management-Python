@@ -289,7 +289,7 @@ class User():
                     if number == 4:
                         User.manage_users(user_connected,company_file_path,user_file_path)
                     else :
-                        User.manage_company()
+                        User.manage_company(user_connected,company_file_path,user_file_path)
 
                 else:
                     time.sleep(0.1)
@@ -408,6 +408,7 @@ class User():
 
     def show_user_list(user_file_path, company_file_path, user_connected):
         user_dic = {}
+        pouet = 2
         user_list = Team_IT_functions.load_user_from_csv(user_file_path)
         for user_obj in user_list:
             if user_connected.get_user_company_id() == user_obj.get_user_company_id():
@@ -418,10 +419,10 @@ class User():
                 user_email = user_obj.get_user_email()
                 user_level = user_obj.get_user_level()
                 user_dic[user_obj.get_user_login()]=[user_name,user_firstname,user_age,user_phone,user_email,user_level]
-        print ("{:<8} {:<8} {:<15} {:<5} {:<11} {:<20} {:<9}".format('Login','UserName','UserFirstname','Age','Phone','Email','Level'))
+        print ("{:<13} {:<13} {:<13} {:<3} {:<11} {:<30} {:<9}".format('Login','UserName','UserFirstname','Age','Phone','Email','Level'))
         for key, value in user_dic.items():
             userName, userFirstname, age, phone, email, level = value
-        print ("{:<8} {:<8} {:<15} {:<5} {:<11} {:<20} {:<9}".format(key, userName, userFirstname, age, phone, email, level))
+            print ("{:<13} {:<13} {:<13} {:<3} {:<11} {:<30} {:<9}".format(key, userName, userFirstname, age, phone, email, level))
 
         check=getpass("get back ? (press enter)")
         Team_IT_functions.clearConsole()
