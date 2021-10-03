@@ -12,10 +12,8 @@ class Director(User):
         return self.job
 
     def create_root_user(CompanyID,user_user_file_path):
-        RoottUser = Director('oot', 'r', 'None', 'None', 'None', 'None', 'root', CompanyID, 1,'admin')
+        RoottUser = Director('oot', 'root', 'None', 'None', 'None', 'None', 'root', CompanyID, 1,'admin')
         User.save_user(RoottUser,user_user_file_path)
-        print ('Your login is root') 
-        print ('and your password is root')
         print ('( please, change your default password )')
 
 

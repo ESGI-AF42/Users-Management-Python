@@ -58,9 +58,6 @@ class Company():
         for company_obj in company_list:
             if company_obj.get_company_id() == CompanyID:
                 return company_obj.get_company_name()
-
-
-
 #fin get_company_from_id()
 
 
@@ -117,6 +114,7 @@ class Company():
                 print("invalid or empty value, you should choose a string")
         user_company = Company(CompanyID, CompanyName, CompanyType, CompanySector, CompanyCountry, CompanyAddress)
         Company.save_company(user_company, company_file_path)
+        print("Company created")
         Team_IT_functions.clearConsole()
         Director.create_root_user(CompanyID,user_file_path)
         User.connect(company_file_path,user_file_path,user_company)
@@ -174,6 +172,7 @@ class Company():
                         break   
                 if line[CompanyID_cpt] != "CompanyID":
                     company_list.append(Company(line[CompanyID_cpt],line[CompanyName_cpt],line[CompanyType_cpt],line[CompanySector_cpt],line[CompanyCountry_cpt],line[CompanyAddress_cpt]))
+            csvfile.close()
             return company_list
 #fin load_company_from_csv()
 
@@ -202,7 +201,7 @@ class Company():
                     choosed_company=int(input("Make your choice : "))
                     time.sleep(0.1)
                 except: 
-                    print("invalid or empty value, you should choose an integer")
+                    print("error")
 
                 if not choosed_company in list_company_id:
                     print('This number is not in the list')

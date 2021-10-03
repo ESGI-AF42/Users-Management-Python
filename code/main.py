@@ -37,17 +37,9 @@ if company_file_exist:
     #demander quelle entreprise est la notre, sinon il faut en créer
     #si on choisit de créer entreprise alors meme procesus que pour la creation normal
     #sinon on choisit une des entreprises pour se connecter 
-    Team_IT_functions.start_connexion_process(company_file_path,user_file_path)
-        #on se connecte avec un user de l'entreprise correspondante
-        #prochaine fonction: sauvegarder user dans le fichier
 
-        #Todo modifier la fonction qui attribue un login aux utilisateurs pour enpecher les doublons
-            
-    #print(newUser.get_user_level())
-    #print(newUser.get_user_password())
-    #stored_psswd = newUser.get_user_password()
-    #print(User.verify_psswd(stored_psswd,"azertyuiop"))
-        
+    Team_IT_functions.start_connexion_process(company_file_path,user_file_path)
+    
 else:
     print("No Companyoration was create before so you should do it first. Please complete empty fields")
     time.sleep(0.1)
