@@ -470,8 +470,10 @@ class User():
 
 
 #Todo
-    def manage_company():
-        print("manage company")
+    def manage_company(user_connected, company_file_path, user_file_path):
+        check=getpass(" Function not implemented yet (press enter)")
+        Team_IT_functions.clearConsole()
+        User.connected(user_connected, company_file_path, user_file_path)
 
 
 
