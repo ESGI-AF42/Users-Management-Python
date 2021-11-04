@@ -553,7 +553,7 @@ class User():
 
 
     def deactivate_user(user_connected, user_file_path, company_file_path):
-        print("which user you want activate ?")
+        print("which user you want deactivate ?")
         user_up_company_list = []
         user_up_company_dic = {}
         number = None
